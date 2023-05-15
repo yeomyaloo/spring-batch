@@ -7,3 +7,4 @@ spring batch programming Practice
 
 # 스프링 배치의 구조
 ![image](https://user-images.githubusercontent.com/81970382/230705941-6b087338-fbd7-4be5-b814-832d3b3aeec8.png)
+[무제.pdf](https://github.com/yeomyaloo/spring-batch/files/11476646/default.pdf)
