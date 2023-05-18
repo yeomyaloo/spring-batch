@@ -11,7 +11,7 @@ public interface QuerydslMemberRepository {
 
     Member findMemberByLoginId(String loginId);
 
-    List<Member> findBirthdayMemberByLaterDay(String laterDay) throws ParseException;
+    List<Member> findBirthdayMemberByLaterDay(String laterDay);
 
 
 }
