@@ -1,4 +1,4 @@
-package com.example.springbatchapiserver.domain.entity;
+package com.example.springbatchapiserver.member.domain.entity;
 
 
 import jakarta.persistence.*;
@@ -32,6 +32,10 @@ public class Member {
 
     @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean isDeleted;
+
+    private String birthday;
+
+
 
 
 }
