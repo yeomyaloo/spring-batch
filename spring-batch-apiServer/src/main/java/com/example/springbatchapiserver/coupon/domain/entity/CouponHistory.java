@@ -3,11 +3,10 @@ package com.example.springbatchapiserver.coupon.domain.entity;
 import com.example.springbatchapiserver.coupon.common.converter.CouponStateCodeConverter;
 import com.example.springbatchapiserver.coupon.domain.entity.typecode.CouponUsedStateCode;
 import jakarta.persistence.*;
-import lombok.Cleanup;
 
 import java.time.LocalDate;
 
-public class couponHistory {
+public class CouponHistory {
 
 
     @Id

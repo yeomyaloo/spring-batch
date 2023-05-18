@@ -24,7 +24,6 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
-
     @Column(nullable = false)
     private String name;
 
@@ -32,7 +31,6 @@ public class Member {
     private Boolean isDeleted;
 
     private String birthday;
-
 
 
 

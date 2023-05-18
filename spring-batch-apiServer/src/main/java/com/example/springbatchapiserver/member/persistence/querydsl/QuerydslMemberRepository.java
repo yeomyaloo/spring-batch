@@ -1,4 +1,17 @@
 package com.example.springbatchapiserver.member.persistence.querydsl;
 
-public class QuerydslMemberRepository {
+import com.example.springbatchapiserver.member.domain.entity.Member;
+
+import java.text.ParseException;
+import java.util.List;
+
+public interface QuerydslMemberRepository {
+
+    Member findMemberById(Long id);
+
+    Member findMemberByLoginId(String loginId);
+
+    List<Member> findBirthdayMemberByLaterDay(String laterDay) throws ParseException;
+
+
 }
