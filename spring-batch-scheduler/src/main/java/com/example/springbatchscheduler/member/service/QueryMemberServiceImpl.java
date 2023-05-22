@@ -2,15 +2,17 @@ package com.example.springbatchscheduler.member.service;
 
 
 import com.example.springbatchscheduler.config.ServerConfig;
-import com.example.springbatchscheduler.member.dto.BirthdayMemberResponse;
+import com.example.springbatchscheduler.member.dto.MemberIdResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -18,12 +20,16 @@ public class QueryMemberServiceImpl implements QueryMemberService{
 
     private final RestTemplate restTemplate;
     private final ServerConfig serverConfig;
-    private final
+    private final static String PATH = "/api/service/members";
 
     @Override
-    public List<BirthdayMemberResponse> findBirthdayMemberByLaterDay(String laterDay) {
+    public List<MemberIdResponseDto> findBirthdayMemberByLaterDay(String laterDay) {
 
-        ResponseEntity<List<BirthdayMemberResponse>>
-        return null;
+        String uri = UriComponentsBuilder.fromHttpUrl(serverConfig.getApiServerUrl() + PATH + "birthday").queryParam("laterDay",laterDay).encode().toUriString();
+
+        ResponseEntity<ResponseEntity<List<MemberIdResponseDto>>> response = restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<ResponseEntity<List<MemberIdResponseDto>>>() {
+        });
+
+        return Objects.requireNonNull(response.getBody().getBody());
     }
 }

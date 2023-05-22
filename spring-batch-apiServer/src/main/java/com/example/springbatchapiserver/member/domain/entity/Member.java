@@ -30,8 +30,10 @@ public class Member {
     @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean isDeleted;
 
-    private String birthday;
+    @Column(name = "is_sleeper_account", nullable = false)
+    private boolean isSleeperAccount;
 
+    private String birthday;
 
 
 }
