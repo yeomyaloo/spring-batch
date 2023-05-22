@@ -36,14 +36,11 @@ public class MemberCoupon {
     private LocalDate expiryDate;
 
 
-
-
     public void use(){
 
         if(this.isUsed){
             throw new RuntimeException();
         }
-
         this.isUsed = true;
     }
 }
