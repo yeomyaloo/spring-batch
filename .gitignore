@@ -1,2 +1,3 @@
 
 *.yml
+spring-batch-apiServer/src/main/resources/application.properties

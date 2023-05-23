@@ -1,6 +1,7 @@
 package com.example.springbatchapiserver.member.domain.entity;
 
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import lombok.*;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long memberId;
 
 
@@ -33,6 +34,7 @@ public class Member {
     @Column(name = "is_sleeper_account", nullable = false)
     private boolean isSleeperAccount;
 
+    @Column(name = "birthday", nullable = false)
     private String birthday;
 
 

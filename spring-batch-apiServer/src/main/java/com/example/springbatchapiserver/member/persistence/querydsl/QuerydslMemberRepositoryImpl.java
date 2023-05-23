@@ -17,7 +17,7 @@ import java.util.List;
 @Repository
 public class QuerydslMemberRepositoryImpl implements QuerydslMemberRepository{
 
-
+ 
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override

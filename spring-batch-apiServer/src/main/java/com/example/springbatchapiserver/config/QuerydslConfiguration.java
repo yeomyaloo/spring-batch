@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 import jakarta.persistence.*;
 
+
+@Configuration
 public class QuerydslConfiguration {
 
 

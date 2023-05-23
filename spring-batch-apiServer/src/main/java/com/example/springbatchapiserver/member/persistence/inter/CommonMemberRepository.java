@@ -4,5 +4,5 @@ import com.example.springbatchapiserver.member.domain.entity.Member;
 
 public interface CommonMemberRepository {
 
-    Member save(Long memberId);
+    Member save(Member member);
 }

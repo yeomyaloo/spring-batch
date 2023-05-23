@@ -30,12 +30,14 @@ class MemberRepositoryTest {
 
 
     @Autowired
-    private MemberRepository memberRepository;
+    MemberRepository memberRepository;
 
 
     @BeforeEach
     void setUp() {
         member = MemberDummy.dummy();
+        Member persist = entityManager.persist(member);
+
     }
 
 
@@ -43,13 +45,13 @@ class MemberRepositoryTest {
     @Test
     void testSave(){
         //given
-        Member persist = entityManager.persist(member);
+        Long memberId = member.getMemberId();
 
         //when
-        Member save = memberRepository.save(persist.getMemberId());
+        Member save = memberRepository.save(member);
 
         //then
-        assertThat(save.getMemberId()).isEqualTo(persist.getMemberId());
+        assertThat(save.getMemberId()).isEqualTo(memberId);
 
     }
 

@@ -11,6 +11,7 @@ public class MemberDummy {
                 .password("1234")
                 .name("test name")
                 .isDeleted(false)
+                .isSleeperAccount(false)
                 .birthday("19960320")
                 .build();
     }
