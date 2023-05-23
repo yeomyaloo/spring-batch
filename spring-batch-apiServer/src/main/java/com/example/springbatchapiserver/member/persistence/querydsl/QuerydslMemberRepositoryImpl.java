@@ -1,6 +1,7 @@
 package com.example.springbatchapiserver.member.persistence.querydsl;
 
 
+import com.example.springbatchapiserver.member.domain.dto.MemberRequestDto;
 import com.example.springbatchapiserver.member.domain.entity.Member;
 import com.example.springbatchapiserver.member.domain.entity.QMember;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -60,15 +61,4 @@ public class QuerydslMemberRepositoryImpl implements QuerydslMemberRepository{
                 .fetch();
     }
 
-    @Override
-    public List<Member> findMembersById(Long id) {
-        QMember member = QMember.member;
-
-        return jpaQueryFactory.
-                selectFrom(member).
-                where(member.memberId.eq(id),
-                        member.isDeleted.isFalse(),
-                        member.isSleeperAccount.isFalse()).
-                fetch();
-    }
 }

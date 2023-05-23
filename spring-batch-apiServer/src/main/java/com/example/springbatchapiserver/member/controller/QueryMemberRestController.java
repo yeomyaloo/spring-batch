@@ -28,8 +28,8 @@ public class QueryMemberRestController {
     }
 
     @PutMapping("/sleeperAccount")
-    public ResponseEntity<List<MemberResponseDto>> getSleeperAccountMembers(MemberRequestDto request){
-        List<MemberResponseDto> sleeperAccountMember = queryMemberService.findSleeperAccountMember(request);
+    public ResponseEntity<List<MemberResponseDto>> getSleeperAccountMembers(List<MemberRequestDto> requests){
+        List<MemberResponseDto> sleeperAccountMember = queryMemberService.findSleeperMembers(requests);
 
         return ResponseEntity.ok(sleeperAccountMember);
 

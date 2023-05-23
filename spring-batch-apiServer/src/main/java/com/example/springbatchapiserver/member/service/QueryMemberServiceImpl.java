@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
-public class QueryMemberServiceImpl implements QueryMemberService{
+public class QueryMemberServiceImpl implements QueryMemberService {
 
     private final QuerydslMemberRepository querydslMemberRepository;
 
@@ -33,16 +33,18 @@ public class QueryMemberServiceImpl implements QueryMemberService{
                 .map(member -> BirthdayMemberResponse.fromEntity(member)).collect(Collectors.toList());
     }
 
-    @Override
-    @Transactional
-    public List<MemberResponseDto> findSleeperAccountMember(MemberRequestDto responseDto) {
 
-        List<Member> members = Objects.requireNonNull(querydslMemberRepository.findMembersById(responseDto.getMemberId()));
 
-        members.forEach(Member::switchedSleeperAccount);
+    public List<MemberResponseDto> findSleeperMembers(List<MemberRequestDto> request) {
+        List<MemberResponseDto> responseDtoList = new ArrayList<>();
 
-        return members.stream().map(MemberResponseDto::fromEntity).collect(Collectors.toList());
+        for (MemberRequestDto dto : request) {
+            Member member = Objects.requireNonNull(querydslMemberRepository.findMemberById(dto.getMemberId()));
+
+            MemberResponseDto memberResponseDto = MemberResponseDto.fromEntity(member);
+
+            responseDtoList.add(memberResponseDto);
+        }
+        return Objects.requireNonNull(responseDtoList);
     }
-
-
 }
