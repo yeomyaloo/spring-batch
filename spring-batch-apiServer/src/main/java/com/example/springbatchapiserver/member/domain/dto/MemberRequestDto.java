@@ -1,13 +1,12 @@
-package com.example.springbatchscheduler.member.dto;
+package com.example.springbatchapiserver.member.domain.dto;
 
 
 import lombok.*;
 
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
-public class MemberSleeperAccountResponse {
-
+@Builder
+public class MemberRequestDto {
     private Long memberId;
-    private boolean isSleeperAccount;
 }

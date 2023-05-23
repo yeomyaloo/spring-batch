@@ -36,4 +36,12 @@ public class Member {
     private String birthday;
 
 
+    public void switchedSleeperAccount(){
+        if (this.isSleeperAccount){
+            //TODO:  해당하는 에러를 명확하게 명시
+            throw new RuntimeException();
+        }
+        this.isSleeperAccount = true;
+    }
+
 }

@@ -13,7 +13,8 @@ public interface QuerydslMemberRepository {
 
     List<Member> findBirthdayMemberByLaterDay(String laterDay);
 
-    List<>
+    List<Member> findMembersById(Long id);
+
 
 
 }

@@ -27,7 +27,9 @@ public class QuerydslMemberRepositoryImpl implements QuerydslMemberRepository{
 
         return jpaQueryFactory.
                 selectFrom(member).
-                where(member.memberId.eq(id)).
+                where(member.memberId.eq(id),
+                        member.isDeleted.isFalse(),
+                        member.isSleeperAccount.isFalse()).
                 fetchOne();
 
     }
@@ -56,5 +58,17 @@ public class QuerydslMemberRepositoryImpl implements QuerydslMemberRepository{
                 where(member.birthday.substring(4).eq(later.toString()),
                         member.isDeleted.isFalse())
                 .fetch();
+    }
+
+    @Override
+    public List<Member> findMembersById(Long id) {
+        QMember member = QMember.member;
+
+        return jpaQueryFactory.
+                selectFrom(member).
+                where(member.memberId.eq(id),
+                        member.isDeleted.isFalse(),
+                        member.isSleeperAccount.isFalse()).
+                fetch();
     }
 }

@@ -3,10 +3,10 @@ package com.example.springbatchscheduler.member.service;
 
 import com.example.springbatchscheduler.config.ServerConfig;
 import com.example.springbatchscheduler.member.dto.MemberIdResponseDto;
+import com.example.springbatchscheduler.member.dto.MemberRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -25,11 +25,27 @@ public class QueryMemberServiceImpl implements QueryMemberService{
     @Override
     public List<MemberIdResponseDto> findBirthdayMemberByLaterDay(String laterDay) {
 
-        String uri = UriComponentsBuilder.fromHttpUrl(serverConfig.getApiServerUrl() + PATH + "birthday").queryParam("laterDay",laterDay).encode().toUriString();
+        String uri = UriComponentsBuilder.fromHttpUrl(serverConfig.getApiServerUrl() + PATH + "/birthday").queryParam("laterDay",laterDay).encode().toUriString();
 
         ResponseEntity<ResponseEntity<List<MemberIdResponseDto>>> response = restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<ResponseEntity<List<MemberIdResponseDto>>>() {
         });
 
         return Objects.requireNonNull(response.getBody().getBody());
     }
+
+    @Override
+    public List<MemberIdResponseDto> findSleeperAccountMembers(MemberRequestDto requestDto) {
+
+        String uri = UriComponentsBuilder.fromHttpUrl(serverConfig.getApiServerUrl() + PATH + "/sleeperAccount").encode().toUriString();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<MemberIdResponseDto> httpEntity = new HttpEntity(headers);
+
+        ResponseEntity<List<MemberIdResponseDto>> response = restTemplate.exchange(uri, HttpMethod.PUT, httpEntity, new ParameterizedTypeReference<List<MemberIdResponseDto>>() {
+        });
+        return Objects.requireNonNull(response.getBody());
+    }
+
+
 }
