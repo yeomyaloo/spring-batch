@@ -76,17 +76,12 @@ public class SleeperAccountStep {
     }
     @Bean
     public ItemWriter<MemberRequestDto> sleeperAccountWriter(){
-        return this::changeSleeperAccount;
+        return item ->{
+            Objects.requireNonNull(queryMemberService.findSleeperAccountMembers((List<MemberRequestDto>) item));
+        };
 
     }
-
-    private void changeSleeperAccount(Chunk<? extends MemberRequestDto> dto) {
-
-
-        Objects.requireNonNull(queryMemberService.findSleeperAccountMembers((List<MemberRequestDto>) dto));
-
-    }
-
+    
 
 
 }
