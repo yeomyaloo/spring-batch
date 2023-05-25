@@ -1,35 +1,34 @@
-package com.example.springbatchscheduler.member.job;
+package com.example.springbatchscheduler.member.step;
 
 
 import com.example.springbatchscheduler.member.dto.MemberIdResponseDto;
 import com.example.springbatchscheduler.member.dto.MemberRequestDto;
-import com.example.springbatchscheduler.member.dto.MemberSleeperAccountRequest;
 import com.example.springbatchscheduler.member.service.QueryMemberService;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemStreamWriter;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * 최근 1년간 로그인 흔적이 없는 회원을 휴먼 회원 처리하는 job입ㄴ다
+ * 최근 1년간 로그인 흔적이 없는 회원을 휴먼 회원 처리하는 item(reader, processor, writer) 입니다.
+ *
  * */
 
 @RequiredArgsConstructor
 @Slf4j
-public class SleeperAccountStep {
+@Configuration
+public class SleeperAccountItem {
 
     private final JobBuilder jobBuilder;
     private final StepBuilder stepBuilder;
@@ -81,7 +80,9 @@ public class SleeperAccountStep {
         };
 
     }
-    
+
+    @Bean
+
 
 
 }
