@@ -30,8 +30,6 @@ import java.util.Objects;
 @Configuration
 public class SleeperAccountItem {
 
-    private final JobBuilder jobBuilder;
-    private final StepBuilder stepBuilder;
     private final EntityManagerFactory entityManagerFactory;
     private final static int CHUNK_SIZE = 100;
 
@@ -81,7 +79,7 @@ public class SleeperAccountItem {
 
     }
 
-    @Bean
+
 
 
 
