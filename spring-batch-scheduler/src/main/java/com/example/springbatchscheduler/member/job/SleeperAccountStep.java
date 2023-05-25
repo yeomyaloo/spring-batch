@@ -10,10 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
@@ -82,7 +80,7 @@ public class SleeperAccountStep {
 
     }
 
-    private void changeSleeperAccount(MemberRequestDto dto) {
+    private List<MemberIdResponseDto> changeSleeperAccount(List<MemberRequestDto> dto) {
 
 
         return Objects.requireNonNull(queryMemberService.findSleeperAccountMembers(dto));

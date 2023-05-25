@@ -34,13 +34,13 @@ public class QueryMemberServiceImpl implements QueryMemberService{
     }
 
     @Override
-    public List<MemberIdResponseDto> findSleeperAccountMembers(MemberRequestDto requestDto) {
+    public List<MemberIdResponseDto> findSleeperAccountMembers(List<MemberRequestDto> requestDto) {
 
         String uri = UriComponentsBuilder.fromHttpUrl(serverConfig.getApiServerUrl() + PATH + "/sleeperAccount").encode().toUriString();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<MemberIdResponseDto> httpEntity = new HttpEntity(headers);
+        HttpEntity<List<MemberRequestDto>> httpEntity = new HttpEntity(headers);
 
         ResponseEntity<List<MemberIdResponseDto>> response = restTemplate.exchange(uri, HttpMethod.PUT, httpEntity, new ParameterizedTypeReference<List<MemberIdResponseDto>>() {
         });

@@ -9,5 +9,5 @@ public interface QueryMemberService {
 
     List<MemberIdResponseDto> findBirthdayMemberByLaterDay(String laterDay);
 
-    List<MemberIdResponseDto> findSleeperAccountMembers(MemberRequestDto requestDto);
+    List<MemberIdResponseDto> findSleeperAccountMembers(List<MemberRequestDto> requestDto);
 }
