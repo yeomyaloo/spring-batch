@@ -10,12 +10,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemStreamWriter;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
 
+import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,9 +37,7 @@ public class SleeperAccountStep {
     private final static int CHUNK_SIZE = 100;
 
     private final QueryMemberService queryMemberService;
-
-    private List<MemberSleeperAccountRequest> requestList;
-
+    private List<MemberRequestDto> requestDto = new ArrayList<>();
 
     /**
      * jpaCursorItemReader를 사용한 휴먼 회원을 찾아올 때 사용하는 itemReader입니다.
@@ -55,35 +57,33 @@ public class SleeperAccountStep {
     }
 
 
+    /**
+     * 휴먼 회원 목록을 Response dto로 받아와서 휴먼회원으로 변경하는 요청에 사용할 request dto로 변환
+     *
+     * @return 휴먼 회원 변경에 사용하는 response dto로 변환 processor
+     * */
+
     @Bean
-    public ItemProcessor<MemberIdResponseDto, MemberSleeperAccountRequest> sleeperAccountProcessor(){
+    public ItemProcessor<MemberIdResponseDto, MemberRequestDto> sleeperAccountProcessor(){
         return item -> {
-            //TODO : 해당 클래스명 변경하기
-            MemberSleeperAccountRequest request = new MemberSleeperAccountRequest(item.getMemberId());
-            this.requestList.forEach(
-                    member -> {
-                        request.getMemberId();
-                    }
-            );
-            return request;
+            MemberRequestDto memberRequestDto = new MemberRequestDto(item.getMemberId());
+            this.requestDto.forEach(sleeper -> {
+                requestDto.add(memberRequestDto);
+            });
+            return memberRequestDto;
         };
-
+        
     }
-
-    //TODO: 중간 가공 PROCESSOR, WRITER작업 완료하기, 가져온 회원 PK로 회원 데이터 변경하기 isSleeperAccount -> true로 만들기
     @Bean
-    public ItemWriter<MemberIdResponseDto> sleeperAccountWriter(){
-        return item -> {
-
-
-        }
+    public ItemWriter<MemberRequestDto> sleeperAccountWriter(){
+        return this::changeSleeperAccount;
 
     }
 
-    private List<MemberIdResponseDto> changeSleeperAccount(List<MemberRequestDto> dto) {
+    private void changeSleeperAccount(Chunk<? extends MemberRequestDto> dto) {
 
 
-        return Objects.requireNonNull(queryMemberService.findSleeperAccountMembers(dto));
+        Objects.requireNonNull(queryMemberService.findSleeperAccountMembers((List<MemberRequestDto>) dto));
 
     }
 
