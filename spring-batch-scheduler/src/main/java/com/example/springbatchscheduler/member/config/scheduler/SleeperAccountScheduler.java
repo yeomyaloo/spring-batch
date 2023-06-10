@@ -16,7 +16,10 @@ public class SleeperAccountScheduler {
 
     private final Job job;
 
-    @Scheduled()
+    /**
+     * cron 표현식을 사용해서 매일 자정에 실행할수 있게 진행
+     * */
+    @Scheduled(cron = "0 0 0 * * ?")
     public void sleeperAccountRun(){
 
 
